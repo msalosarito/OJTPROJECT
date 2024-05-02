@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document List</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Add Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Vco1sVrOjuXNFktk7vcYtMT00OOAfypbiHjWzVXNnW7vA/h+5+PxQ4DiVHqM4uUoHZHR+aJqRbHuLTN2C9fj4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Optionally, add custom CSS for additional styling -->
+    <style>
+        /* Add custom CSS here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #333; /* Dark gray text color */
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #0056b3; /* Dark blue navbar */
+        }
+        .navbar-brand {
+            color: #fff !important; /* White color for navbar brand */
+        }
+        .navbar-nav .nav-link {
+            color: #fff !important; /* White color for navbar links */
+        }
+        .parallax {
+            background-image: url('https://newsinfo.inquirer.net/files/2022/01/DOTr.png'); /* Replace with your image URL */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff; /* White text color */
+        }
+        .parallax h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .container {
+            padding: 50px 20px;
+        }
+        h1 {
+            color: #0056b3; /* Blue color for headings */
+        }
+        .list-group-item {
+            background-color: #fff; /* White background for list items */
+            border: none; /* No border */
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Shadow effect */
+        }
+        .document-item {
+            padding: 20px;
+        }
+        .document-item a {
+            color: #0056b3; /* Blue color for links */
+        }
+        .sidebar {
+            height: 100%;
+            width: 0; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #0056b3; /* Dark blue for sidebar */
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 50px; /* Space for the title */
+            padding-left: 20px;
+            z-index: 1; /* Ensure it's on top of other elements */
+            color: #fff; /* White text color */
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff; /* White text color */
+            display: block;
+        }
+        .sidebar a:hover {
+            background-color: #003a70; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Department of Transportation   </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Parallax Section -->
+    <section class="parallax">
+    </section>
+
+  
+
+    <!-- Page content -->
+    <div class="container">
+        <h1>Document List</h1>
+        <ul class="list-group">
+            {% for key, document in documents.items %}
+                <li class="list-group-item document-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>{{ document.title }}</span>
+                        <div>
+                            <a href="{{ document.file_url }}" class="btn btn-primary">Download</a>
+                            <a href="{% url 'edit_document' key %}" class="btn btn-secondary">Edit</a>
+                            <a href="{% url 'delete_document' key %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_document' %}" class="btn btn-success mt-3">Add Document</a>
+    </div>
+
+</body>
+</html>
+
